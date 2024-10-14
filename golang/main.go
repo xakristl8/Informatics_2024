@@ -6,27 +6,34 @@ import (
 
 func main() {
 	var cookiesShop Shop = Shop{100, 5, 0}
-	var queue []Queue = []Queue{{"олег", 0, 10}, {"вова", 0, 15}, {"акула", 0, 0}}
-	queue[1] = queue[1].SetHaveBuy(1)
+	var queue []Buyer = []Buyer{{"Олег", 100}, {"Вова", 0}, {"акула", 1000}}
+	var Buyers []Buyer = []Buyer{}
 
+	queue[0], cookiesShop = queue[0].Buy(cookiesShop)
+
+	Buyers = append(Buyers, queue[0])
 	queue = queue[1:]
 
-	fmt.Println(queue, cookiesShop)
+	fmt.Println("очередь:", queue)
+	fmt.Println("покупатели:", Buyers)
+	fmt.Println("магазин печенек:", cookiesShop)
 }
 
 type Shop struct {
-	QuantitySale int
-	Price        int
-	Money        int
+	quantitySale int
+	price        int
+	money        int
 }
 
-type Queue struct {
-	Name    string
-	Money   int
-	HaveBuy int
+type Buyer struct {
+	name  string
+	money int
 }
 
-func (q Queue) SetHaveBuy(i int) Queue {
-	q.HaveBuy = i
-	return q
+func (b Buyer) Buy(s Shop) (Buyer, Shop) {
+	if b.money > s.price {
+		b.money -= s.price
+		s.quantitySale -= 1
+	}
+	return b, s
 }
