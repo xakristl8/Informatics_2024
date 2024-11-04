@@ -15,6 +15,7 @@ func CompleteTaskA(a, b, xMin, xMax, xDelta float64) []float64 {
 	for i := xMin; i < xMax; i += xDelta {
 		result = append(result, CalculateFunction(a, b, i))
 	}
+	return result
 }
 
 func CompleteTaskB(a, b float64, x []float64) []float64 {
@@ -22,6 +23,7 @@ func CompleteTaskB(a, b float64, x []float64) []float64 {
 	for _, i := range x {
 		result = append(result, CalculateFunction(a, b, i))
 	}
+	return result
 }
 
 func CompleteLaba4() {
